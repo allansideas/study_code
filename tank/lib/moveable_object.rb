@@ -9,14 +9,13 @@
 # Have a Coordinate < Grid object that can be used to place things and query if 
 # things are already there (collisions), out of bounds...etc
 class MoveableObject
-  attr_reader :x, :y, :orientation, :speed
+  attr_reader :x, :y, :orientation, :actor
 
-  def initialize(x, y, speed, orientation=0)
+  def initialize(x, y, orientation = 0, actor)
     @x = x
     @y = y
+    @actor = actor
     @orientation = orientation
-    #for bonus points
-    @speed = speed
   end
  
   # These rotate methods seem like there would be a way better way of doing it
@@ -67,17 +66,26 @@ class MoveableObject
   # bunch into move_forward and move_backward
   def move(direction)
     if positive_movement?(direction) && x_axis_movement?
-      @x += speed
+      @x += actor.speed
     elsif !positive_movement?(direction) && x_axis_movement?
-      @x -= speed
+      @x -= actor.speed
     elsif positive_movement?(direction) && y_axis_movement?
-      @y += speed
+      @y += actor.speed
     elsif !positive_movement?(direction) && y_axis_movement?
-      @y -= speed
+      @y -= actor.speed
     end
   end
 
   def log_position
     "x: #{x}, y:#{y}"
+  end
+end
+
+#trying to be fancier
+class Tank
+  attr_reader :speed
+
+  def initialize(speed=nil)
+    @speed = speed || 1
   end
 end

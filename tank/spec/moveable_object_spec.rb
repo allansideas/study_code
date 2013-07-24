@@ -1,7 +1,7 @@
 require 'moveable_object'
 describe MoveableObject do
   before(:each) do
-    @tank = MoveableObject.new(10, 10, 1, 0)
+    @tank = MoveableObject.new(10, 10, 0, Tank.new())
   end
 
   it "should be placed on a grid" do
@@ -76,7 +76,7 @@ describe MoveableObject do
   end
 
   it "should move further if it has a higher speed" do
-    @fast_tank = MoveableObject.new(10, 10, 2, 0)
+    @fast_tank = MoveableObject.new(10, 10, 0, Tank.new(2))
     @fast_tank.move('forward')
     @fast_tank.x.should == 10
     @fast_tank.y.should == 12
